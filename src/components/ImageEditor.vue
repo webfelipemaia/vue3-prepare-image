@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div ref="editorContainer" style="height: 700px;"></div>
+    <div ref="editorContainer" class="editor-container"></div>
   </div>
 </template>
 
@@ -8,6 +8,9 @@
 import { onMounted, ref } from 'vue';
 import ImageEditor from 'tui-image-editor';
 import 'tui-image-editor/dist/tui-image-editor.css';
+import locale_ptBR from '@/locales/locale-pt-br';
+import whiteTheme from '@/theme/white-theme.js';
+import blackTheme from '@/theme/black-theme.js';
 
 const editorContainer = ref(null);
 let editor;
@@ -19,12 +22,13 @@ onMounted(() => {
         path: '',
         name: 'SampleImage',
       },
-      theme: {},
+      theme: blackTheme,
+      locale: locale_ptBR,
       menu: ['crop', 'filter'],
       initMenu: 'filter',
       uiSize: {
-        width: '800px',
-        height: '540px',
+        width: '1024px',
+        height: '680px',
       },
       menuBarPosition: 'bottom',
     },
@@ -39,5 +43,8 @@ onMounted(() => {
 </script>
 
 <style scoped>
-/* Opcional: ajuste de layout */
+.editor-container {
+  width: 100%;
+  height: calc(100vh - 100px); /* ajusta altura automaticamente */
+}
 </style>
