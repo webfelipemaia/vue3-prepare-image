@@ -1,7 +1,7 @@
 const blackTheme = {
-  'common.bi.image': 'https://uicdn.toast.com/toastui/img/tui-image-editor-bi.png',
-  'common.bisize.width': '251px',
-  'common.bisize.height': '21px',
+  'common.bi.image': 'http://localhost:5173/src/assets/arquivo-nacional-logo.png',
+  'common.bisize.width': '111px',
+  'common.bisize.height': '55px',
   'common.backgroundImage': 'none',
   'common.backgroundColor': '#1e1e1e',
   'common.border': '0px',

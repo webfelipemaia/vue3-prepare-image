@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="editor-wrapper">
     <div ref="editorContainer" class="editor-container"></div>
   </div>
 </template>
@@ -30,7 +30,7 @@ onMounted(() => {
         width: '1024px',
         height: '680px',
       },
-      menuBarPosition: 'bottom',
+      menuBarPosition: 'right',
     },
     cssMaxWidth: 700,
     cssMaxHeight: 500,
@@ -41,10 +41,3 @@ onMounted(() => {
   });
 });
 </script>
-
-<style scoped>
-.editor-container {
-  width: 100%;
-  height: calc(100vh - 100px); /* ajusta altura automaticamente */
-}
-</style>

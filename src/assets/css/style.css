@@ -1,0 +1,18 @@
+.editor-wrapper {
+  background-color: #151515;
+}
+.editor-container {
+  margin: 0 auto;
+  width: 100%;
+  height: calc(100vh - 100px); /* ajusta altura automaticamente */
+}
+
+.tui-image-editor-container .tui-image-editor-header-logo > img, 
+.tui-image-editor-container .tui-image-editor-controls-logo > img{
+  display: none;
+}
+
+.tui-image-editor-container .tui-image-editor-menu > .tui-image-editor-item, 
+.tui-image-editor-container .tui-image-editor-help-menu > .tui-image-editor-item {
+  margin-top: 5px;
+}
