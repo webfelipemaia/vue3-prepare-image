@@ -33,6 +33,13 @@ const blackTheme = {
   'menu.iconSize.width': '24px',
   'menu.iconSize.height': '24px',
 
+  // Adicione um item de menu customizado
+  'menu.customItems': [{
+    name: 'resetZoom',
+    iconClass: 'tui-image-editor-icon-reset',
+    tooltip: 'Reset Zoom'
+  }],  
+
   // submenu icons
   'submenu.normalIcon.color': '#8a8a8a',
   'submenu.activeIcon.color': '#e9e9e9',
