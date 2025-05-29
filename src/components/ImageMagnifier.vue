@@ -1,9 +1,9 @@
 <template>
   <div class="magnifier-container">
-    <!-- Botão deve estar sempre visível -->
+    <!-- Botão deve estar sempre visível 
     <button @click="resetZoom" class="reset-zoom-btn">
       Resetar Zoom (100%)
-    </button>
+    </button>-->
 
 
     <div v-if="showMagnifier" class="magnifier" :style="magnifierStyle">

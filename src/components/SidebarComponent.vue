@@ -1,6 +1,6 @@
 <!-- src/components/Sidebar.vue -->
 <template>
-  <div>
+  <div class="sidebar-area">
     <!-- Botão Offcanvas (mobile) -->
     <button
       class="btn btn-primary d-md-none m-2"

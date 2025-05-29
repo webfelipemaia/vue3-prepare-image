@@ -11,12 +11,14 @@ Instale my-project com npm
 ```bash
   git clone https://github.com/webfelipemaia/vue3-prepare-image.git
   cd vue3-prepare-image
-  cd vue3-prepare-image
   npm install
   npm run dev
 ```
     
 ## Melhorias
 
-- Melhorar botão para reset de zoom
-- Adicionar manipulação de arquivo .pdf
+- Melhorar componente manipulação de arquivo .pdf
+- Aplicar componentes Bootstrap em PdfExtractor
+- Criar áreas (pastas) para armazenar imagens em tratamento e imagens tratadas
+- Corrigir Sidebar (remover Offcanvas)
+- Melhorar o conteúdo de Footer

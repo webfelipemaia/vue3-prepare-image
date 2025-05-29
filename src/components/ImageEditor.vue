@@ -1,7 +1,6 @@
 <template>
   <div class="editor-wrapper">
     <div ref="editorContainer" class="editor-container"></div>
-    <!-- Só renderiza o magnifier quando o editor estiver pronto -->
     <ImageMagnifier v-if="editorReady" :imageEditor="editor" />
   </div>
 </template>
@@ -16,7 +15,7 @@ import ImageMagnifier from './ImageMagnifier.vue';
 
 const editorContainer = ref(null);
 const editor = ref(null);
-const editorReady = ref(false); // sinaliza quando estiver pronto
+const editorReady = ref(false);
 
 const getCanvasElement = () => {
   return editor.value?._graphics?.getCanvasElement() ?? null;
@@ -50,31 +49,47 @@ onMounted(() => {
   });
 
   setTimeout(() => {
-    const helpMenu = document.querySelector('.tui-help-menu');
-    if (helpMenu) {
-      const resetBtn = document.createElement('button');
-      resetBtn.innerText = 'Resetar Zoom';
-      resetBtn.className = 'tui-custom-reset-btn';
-      resetBtn.style.marginTop = '10px';
-      resetBtn.style.padding = '8px';
-      resetBtn.style.background = '#4a6cf7';
-      resetBtn.style.color = 'white';
-      resetBtn.style.border = 'none';
-      resetBtn.style.borderRadius = '4px';
-      resetBtn.style.cursor = 'pointer';
+  const helpMenu = document.querySelector('.tui-image-editor-help-menu');
+  if (helpMenu) {
+    console.log(helpMenu)
+    const resetBtn = document.createElement('li');
+    resetBtn.className = 'tie-btn-zoomoff tui-image-editor-item help';
+    resetBtn.setAttribute('tooltip-content', 'Resetar Zoom');
+    resetBtn.style.cursor = 'pointer';
+    resetBtn.innerHTML = `
+      <svg class="zoom-out" xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 64 64">
+        <style>
+          .zoom-out {
+            fill: none;
+            stroke: #8a8a8a;
+            stroke-width: 3;
+            fill-rule: evenodd;
+          }
+          .zoom-out:hover {
+            fill: none;
+            stroke: #e9e9e9;
+          }
+        </style>
+        <circle cx="26" cy="26" r="20" class="use-default"/>
+        <line x1="38" y1="38" x2="60" y2="60" stroke-linecap="round" class="use-default"/>
+        <line x1="18" y1="18" x2="34" y2="34" stroke-linecap="round" class="use-default"/>
+        <line x1="34" y1="18" x2="18" y2="34" stroke-linecap="round" class="use-default"/>
+      </svg>
+    `;
 
-      resetBtn.onclick = () => {
-        editor.value.resetZoom();
-      };
+    // Cancelar efeito do zoom
+    resetBtn.onclick = () => {
+      editor.value.resetZoom();
+    };
 
-      helpMenu.appendChild(resetBtn);
-    }
-  }, 1000);
+     //helpMenu.appendChild(resetBtn);
+     helpMenu.insertBefore(resetBtn, helpMenu.firstChild);
+  }
+}, 1000);
 
-  // Sinaliza que o editor está pronto
   setTimeout(() => {
     editorReady.value = true;
-  }, 500); // delay de segurança
+  }, 500);
 });
 
 defineExpose({
@@ -84,9 +99,3 @@ defineExpose({
   instance: editor
 });
 </script>
-
-<style scoped>
-.editor-wrapper {
-  position: relative;
-}
-</style>
