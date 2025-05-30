@@ -12,6 +12,7 @@ export default defineConfig(({ mode }) => {
     resolve: {
       alias: {
         '@': resolve(__dirname, 'src'),
+         'pdfjs-dist': 'pdfjs-dist/es5'
       },
     },
     server: {
@@ -20,5 +21,19 @@ export default defineConfig(({ mode }) => {
         'X-Frame-Options': 'ALLOWALL',
       },
     },
+    build: {
+      target: "es2022"
+    },
+    esbuild: {
+      target: "es2022"
+    },
+    optimizeDeps: {
+      esbuildOptions: {
+        target: "es2022",
+      }
+    },
+    worker: {
+      format: 'es'
+    }
   };
 });

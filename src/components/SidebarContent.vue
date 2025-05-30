@@ -16,7 +16,8 @@ const props = defineProps({
 
 const menu = [
   { path: '/', label: 'Início', icon: '' },
-  { path: '/pdf-para-imagem', label: 'PDF para Imagem', icon: '' },
+  { path: '/extrair-pdf', label: 'Extrair PDF', icon: '' },
+  { path: '/extrair-imagem', label: 'Extrair Imagem', icon: '' },
   { path: '/editar-imagem', label: 'Editar Imagem', icon: '' },
   { path: '/sobre', label: 'Sobre', icon: '' },
 ];

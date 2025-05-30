@@ -18,6 +18,11 @@ import { saveAs } from 'file-saver'
 const pdfArrayBuffer = ref(null)
 const pageRange = ref('')
 const pdfFrame = ref(null)
+const filename = ref('')
+const summary = ref(null)
+const MAX_PAGES = 10
+
+let pdfDoc = null // instância PDF.js global
 
 function readAsyncFile(file) {
   return new Promise((resolve, reject) => {
@@ -28,13 +33,16 @@ function readAsyncFile(file) {
   })
 }
 
+
 function renderPdf(arrayBuff) {
   const tempblob = new Blob([new Uint8Array(arrayBuff)], {
     type: 'application/pdf'
   })
   const docUrl = URL.createObjectURL(tempblob)
   pdfFrame.value.src = docUrl
+  
 }
+
 
 function range(start, end) {
   let length = end - start + 1
@@ -68,6 +76,7 @@ async function extractPages() {
   const newpdf = await pdfNewDoc.save()
   saveAs(new Blob([newpdf], { type: 'application/pdf' }), `extracted.pdf`)
 }
+
 </script>
 
 <style scoped>
