@@ -1,25 +1,53 @@
 <template>
-  <div>
-    <input type="file" @change="handleFileChange" accept="application/pdf" />
-    <iframe ref="pdfFrame" style="width: 100%; height: 500px;"></iframe>
+  <div class="container pt-3 extract-wraper">
+    <div class="row gx-2">
+      <div class="col extract-wraper_col">
+        <div class="p-2">
+          <div class="mb-3">
+            <label for="formFile" class="form-label">Escolha um arquivo PDF</label>
+            <input type="file" @change="handleFileChange" accept="application/pdf" class="form-control" id="formFile">
+          </div>
 
-    <div style="margin-top: 1rem;">
-      <input type="text" v-model="pageRange" placeholder="Ex: 2-4" />
-      <label>Qualidade (1-5):</label>
-      <input type="number" v-model.number="scale" min="0.5" max="5" step="0.1" />
-      <div style="margin-top: 0.5rem;">
-        <button @click="extractImages">Salvar como imagens</button>
+          <div class="mb-3 mt-5">
+            Identifique as páginas para extração
+          </div>
+
+          <iframe ref="pdfFrame" style="width: 100%; height: 500px;"></iframe>
+        </div>
       </div>
-    </div>
+      <div class="col-md-3 extract-wraper_col">
+        <div class="p-2">
+          <div class="mb-5">
+            <h5>Configurações</h5>
+            <div class="mb-3">
+              <label for="formExtractPages" class="form-label">Extrair as páginas</label>
+              <input type="text" v-model="pageRange" placeholder="Ex: 2-4" class="form-control" id="formExtractPages">
+            </div>
+            <div class="mb-3">
+              <label for="formQuality" class="form-label">Qualidade</label>
+              <input type="number" class="form-control" id="formQuality" v-model.number="scale" min="0.5" max="5"
+                step="0.1" aria-describedby="qualityDescription">
+              <span id="qualityDescription" class="form-text">
+                Escolha um valor de 1 a 5.
+              </span>
+            </div>
 
-    <div v-if="summary" style="margin-top: 1rem;">
-      <h4>Resumo da extração:</h4>
-      <ul>
-        <li><strong>Arquivo:</strong> {{ summary.filename }}</li>
-        <li><strong>Total de páginas extraídas:</strong> {{ summary.pagesExtracted }}</li>
-        <li><strong>Páginas:</strong> {{ summary.pages.join(', ') }}</li>
-        <li><strong>Qualidade:</strong> {{ summary.scale }}</li>
-      </ul>
+            <button @click="extractImages" type="submit" class="btn btn-primary mb-3">
+              Salvar como imagens
+            </button>
+          </div>
+
+          <div v-if="summary" style="margin-top: 1rem;">
+            <h5 class="mb-3">Resumo da extração</h5>
+            <ul>
+              <li>Arquivo: <em>{{ summary.filename }}</em></li>
+              <li>Total de páginas extraídas: {{ summary.pagesExtracted }}</li>
+              <li>Páginas: {{ summary.pages.join(', ') }}</li>
+              <li>Qualidade: {{ summary.scale }}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -37,7 +65,7 @@ const filename = ref('')
 const summary = ref(null)
 const MAX_PAGES = 10
 
-let pdfDoc = null // instância PDF.js global
+let pdfDoc = null
 
 function readAsyncFile(file) {
   return new Promise((resolve, reject) => {
@@ -75,27 +103,6 @@ async function handleFileChange(event) {
   const loadingTask = window.pdfjsLib.getDocument({ data: buffer })
   pdfDoc = await loadingTask.promise
 }
-
-async function extractPages() {
-  if (!pdfArrayBuffer.value) return alert('Carregue um PDF primeiro.')
-
-  const totalPages = pdfDoc.numPages
-  const pages = parseRange(pageRange.value, totalPages)
-  if (!pages.length) return alert('Intervalo inválido.')
-  const selectedPages = pages.slice(0, MAX_PAGES)
-
-  // Clona o buffer para evitar erro "detached ArrayBuffer"
-  const bufferClone = pdfArrayBuffer.value.slice(0)
-  const pdfSrcDoc = await PDFLib.PDFDocument.load(bufferClone)
-  const pdfNewDoc = await PDFLib.PDFDocument.create()
-
-  const copiedPages = await pdfNewDoc.copyPages(pdfSrcDoc, selectedPages.map(i => i - 1))
-  copiedPages.forEach(p => pdfNewDoc.addPage(p))
-
-  const newpdf = await pdfNewDoc.save()
-  saveAs(new Blob([newpdf], { type: 'application/pdf' }), `${filename.value}-extraido.pdf`)
-}
-
 
 async function extractImages() {
   if (!pdfDoc) return alert('Carregue um PDF primeiro.')

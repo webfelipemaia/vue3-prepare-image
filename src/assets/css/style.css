@@ -1,5 +1,5 @@
 #app {
-  background-color: #151515;;
+  background-color: #f4f7fc;
 }
 
 .d-flex.container-fluid {  
@@ -11,7 +11,7 @@
   height: calc(100vh - 100px);
 }
 .editor-wrapper {
-  background-color: #151515;
+  background-color: #f4f7fc;
   position: relative;
 }
 
@@ -36,7 +36,31 @@
   margin-top: 5px;
 }
 
+.tui-image-editor {
+  border: 2px solid #3c3c3c;
+  padding: 2px !important;
+}
+
 footer {
   margin-top: 4rem;
   border-top: 1px solid #3c3c3c;
+}
+
+.extract-wraper {
+  background-color: transparent;
+}
+
+.extract-wraper_col {
+  background-color: #fff;
+  border: 1px solid #e2e3e5;
+}
+
+.extract-wraper_col:first-child {
+  margin-right: 1rem;
+}
+
+@media (max-width: 768px) {
+  .extract-wraper_col:first-child {
+    margin-right: 0;
+  }
 }

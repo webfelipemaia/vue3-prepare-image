@@ -1,11 +1,5 @@
 <template>
   <div class="magnifier-container">
-    <!-- Botão deve estar sempre visível 
-    <button @click="resetZoom" class="reset-zoom-btn">
-      Resetar Zoom (100%)
-    </button>-->
-
-
     <div v-if="showMagnifier" class="magnifier" :style="magnifierStyle">
       <canvas ref="magnifierCanvas"></canvas>
     </div>
@@ -80,7 +74,7 @@ const updateMagnifier = async () => {
   if (!editor || !fabricCanvas.value) return;
 
   try {
-    const imageData = await editor.toDataURL(); // capturando imagem do canvas
+    const imageData = await editor.toDataURL();
     fabric.Image.fromURL(imageData, (img) => {
       fabricCanvas.value.clear();
 
