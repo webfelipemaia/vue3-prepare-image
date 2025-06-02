@@ -1,5 +1,5 @@
 #app {
-  background-color: #f4f7fc;
+  background-color: #fff;
 }
 
 .d-flex.container-fluid {  
@@ -9,7 +9,9 @@
 
 .sidebar-area {
   height: calc(100vh - 100px);
+  background-color: rgb(240, 242, 246);
 }
+
 .editor-wrapper {
   background-color: #f4f7fc;
   position: relative;
@@ -46,21 +48,32 @@ footer {
   border-top: 1px solid #3c3c3c;
 }
 
-.extract-wraper {
+.extract-title {
+  padding: 1rem 4rem;
+}
+
+.extract-wrapper {
   background-color: transparent;
+  padding: 4rem;
 }
 
-.extract-wraper_col {
-  background-color: #fff;
-  border: 1px solid #e2e3e5;
+.extract-title {
+  padding-top: 1rem;
 }
 
-.extract-wraper_col:first-child {
+.extract-wrapper_col {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.5rem;
+    padding: calc(-1px + 1rem);
+}
+
+
+.extract-wrapper_col:first-child {
   margin-right: 1rem;
 }
 
 @media (max-width: 768px) {
-  .extract-wraper_col:first-child {
+  .extract-wrapper_col:first-child {
     margin-right: 0;
   }
 }

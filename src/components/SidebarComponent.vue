@@ -35,7 +35,7 @@
 
     <!-- Sidebar fixa para telas grandes -->
     <div
-      class="d-none d-md-flex flex-column bg-light border-end vh-100 p-3 transition-width"
+      class="sidebar-menu d-none d-md-flex flex-column border-end vh-100 p-3 transition-width"
       :style="{ width: collapsed ? '60px' : '250px' }"
     >
       <!-- Botão de colapsar -->

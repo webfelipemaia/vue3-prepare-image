@@ -1,11 +1,33 @@
 <template>
-  <div>
-    <input type="file" id="pdfinput" @change="handleFileChange" accept="application/pdf" />
-    <iframe id="pdfFrame" ref="pdfFrame" style="width: 100%; height: 500px;"></iframe>
+  <div class="pt-3 extract-wrapper">
+    <div class="row gx-2">
+      <div class="col extract-wrapper_col">
+        <div class="p-2">
+          <div class="mb-3">
+            <label for="pdfinput" class="form-label">Escolha um arquivo PDF</label>
+            <input type="file" id="pdfinput" class="form-control" @change="handleFileChange" accept="application/pdf" />
+          </div>
 
-    <div>
-      <input type="text" v-model="pageRange" placeholder="Ex: 1-3" id="rangeselector" />
-      <button @click="extractPages" id="extractBtn">Extrair PDF</button>
+          <div class="mb-3 mt-5">
+            Identifique as páginas para extração
+          </div>
+
+          <iframe id="pdfFrame" ref="pdfFrame" style="width: 100%; height: 500px;"></iframe>
+        </div>
+      </div>
+
+      <div class="col-md-3 extract-wrapper_col">
+        <div class="p-2">
+          <div class="mb-3">
+            <h5>Configurações</h5>
+            <div class="mb-3">
+              <label for="formExtractPages" class="form-label">Extrair as páginas</label>
+              <input type="text" v-model="pageRange" placeholder="Ex: 1-3" class="form-control" id="rangeselector" />
+            </div>
+          </div>
+          <button @click="extractPages" id="extractBtn" class="btn btn-primary mb-3">Extrair PDF</button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -40,7 +62,7 @@ function renderPdf(arrayBuff) {
   })
   const docUrl = URL.createObjectURL(tempblob)
   pdfFrame.value.src = docUrl
-  
+
 }
 
 
@@ -62,7 +84,7 @@ async function extractPages() {
     alert('Por favor, carregue um PDF primeiro!')
     return
   }
-  
+
   const rangelist = pageRange.value.split('-')
   const pdfSrcDoc = await PDFLib.PDFDocument.load(pdfArrayBuffer.value)
   const pdfNewDoc = await PDFLib.PDFDocument.create()
@@ -78,9 +100,3 @@ async function extractPages() {
 }
 
 </script>
-
-<style scoped>
-iframe {
-  border: 1px solid #ccc;
-}
-</style>

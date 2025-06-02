@@ -1,7 +1,7 @@
 <template>
-  <div class="container pt-3 extract-wraper">
+  <div class="pt-3 extract-wrapper">
     <div class="row gx-2">
-      <div class="col extract-wraper_col">
+      <div class="col extract-wrapper_col">
         <div class="p-2">
           <div class="mb-3">
             <label for="formFile" class="form-label">Escolha um arquivo PDF</label>
@@ -15,13 +15,16 @@
           <iframe ref="pdfFrame" style="width: 100%; height: 500px;"></iframe>
         </div>
       </div>
-      <div class="col-md-3 extract-wraper_col">
+      <div class="col-md-3 extract-wrapper_col">
         <div class="p-2">
           <div class="mb-5">
             <h5>Configurações</h5>
             <div class="mb-3">
               <label for="formExtractPages" class="form-label">Extrair as páginas</label>
               <input type="text" v-model="pageRange" placeholder="Ex: 2-4" class="form-control" id="formExtractPages">
+              <span id="qualityDescription" class="form-text">
+                No máximo {{ MAX_PAGES }} podem ser extraídas.
+              </span>
             </div>
             <div class="mb-3">
               <label for="formQuality" class="form-label">Qualidade</label>
@@ -144,8 +147,3 @@ async function extractImages() {
 }
 </script>
 
-<style scoped>
-iframe {
-  border: 1px solid #ccc;
-}
-</style>
